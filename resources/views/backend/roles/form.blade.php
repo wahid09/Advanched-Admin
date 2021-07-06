@@ -107,6 +107,105 @@
         </div>
     </div>
                         
+<div class="row">
+                    <div class="col">
+                        <section class="card">
+                            <header class="card-header d-flex justify-content-between align-items-center">
+                                    <h2 class="card-title pull-left">Manage Roles</h2>
+                                    <a href="{{ route('app.roles.index') }}" class="btn-shadow mr-3 btn btn-warning pull-right" name="button">
+         <i class="fas fa-arrow-left"></i>&nbsp;Back to list
+        </a>
+        {{-- <h5 class="card-header d-flex justify-content-between align-items-center">
+  Title
+  <button type="button" class="btn btn-sm btn-primary">Button</button> --}}
+                                </header>
+                            <form action="https://www.laraplus.bestweby.com/">
+                                <div class="card-body ch-input-wrap">
+                                    <div class="add-post-content">
+                                       <div class="row">
+                                            <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Name(English)</label>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $role->name ?? old('name') }}" required autocomplete="name" autofocus>
+
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="name_bn">Name(Bangla)</label>
+                        <input id="name_bn" type="text" class="form-control @error('name_bn') is-invalid @enderror" name="name_bn" value="{{ $role->name_bn ?? old('name_bn') }}" required autocomplete="name_bn" autofocus>
+
+                        @error('name_bn')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="text-center">
+                        <strong>Manage Permission For Role</strong>
+                        @error('permissions')
+                        <p class="p-2">
+                        <span class="text-danger" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        </p>
+                        @enderror
+                    </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="select-all">
+                                <label class="custom-control-label" for="select-all">Select All</label>
+                            </div>
+                        </div>
+                        @forelse ($modules->chunk(4) as $key=>$chunks)
+                            <div class="form-row">
+                                @foreach ($chunks as $module)
+                                    <div class="col">
+                                    <h5>Module: {{ $module->name}}</h5>
+                                    @foreach ($module->permissions as $permission)
+                                       <div class="mb-3 ml-4">
+                                           <div class="custom-control custom-checkbox mb-2">
+                                           <input type="checkbox" class="custom-control-input" id="permission-{{$permission->id}}" name="permissions[]" value="{{$permission->id }}" @isset($role)
+                                           @foreach ($role->permissions as $assignedPermission)
+                                               {{ $permission->id == $assignedPermission->id ? 'checked' : ''}}
+                                           @endforeach 
+                                           @endisset>
+                                           <label for="permission-{{$permission->id}}" class="custom-control-label">{{$permission->name}}</label>
+                                           </div>
+                                       </div> 
+                                    @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
+                        @empty
+                            <div class="row">
+                                <div class="col text-center">
+                                    <strong>No Module Found</strong>
+                                </div>
+                            </div>
+                        @endforelse
+                    
+                    
+                    </div>
+                                        </div> 
+                                    </div>               
+                                    
+                                </div>
+                                <footer class="card-footer text-right">
+                                    @isset($role)
+                        <i class="fas fa-arrow-circle-up"></i>&nbsp;Update</button>
+                        @else
+                         <i class="fas fa-plus-circle"></i>&nbsp;Create</button>
+                         @endisset
+                                    <button type="reset" class="btn btn-sm btn-default">Reset</button>
+                                </footer>
+                            </form>
+                        </section>
+                    </div>
+                </div>
 @endsection
 @push('js')
 
